@@ -1,6 +1,6 @@
 const Footer  =()=>{
     return(
-        <div className="shadow-2 py-[10px] text-center">
+        <div className="footer py-[10px] text-center">
             Footer
         </div>
     );

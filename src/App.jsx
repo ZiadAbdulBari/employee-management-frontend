@@ -1,5 +1,6 @@
 // import Layout from "./components/layouts/Layout"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer} from 'react-toastify';
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -9,7 +10,7 @@ import Settings from './pages/Settings';
 
 function App() {
   return (
-    // <Layout>
+    <>
       <Router>
         <Routes>
             <Route path="/" element={<Login/>} />
@@ -18,10 +19,10 @@ function App() {
             <Route path="/employee" element={<Employee/>}/>
             <Route path="/todo" element={<Todo/>}/>
             <Route path="/setting" element={<Settings/>}/>
-            
         </Routes>
       </Router>
-    // </Layout>
+      <ToastContainer/>
+    </>
     
   )
 }
