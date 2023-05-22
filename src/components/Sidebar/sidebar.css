@@ -1,0 +1,6 @@
+.general{
+   @apply py-[20px] px-[20px] text-white block
+}
+.active{
+    @apply bg-secondary-1 !text-[#0B2447]
+}
