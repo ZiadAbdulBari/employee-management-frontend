@@ -1,12 +1,11 @@
-import axiosInstance from "../healpers/axios.config";
-import toastMessage from "../healpers/toast";
-import {  useEffect, useState } from "react";
-import { useNavigate,Link } from "react-router-dom";
+// import axiosInstance from "../healpers/axios.config";
+// import toastMessage from "../healpers/toast";
+import {  useEffect, useState, useContext } from "react";
+import { AuthContext } from '../context/AuthContext/AuthContext';
+import { useNavigate, Link } from "react-router-dom";
 const Login = ()=>{
     let navigate = useNavigate();
-    // const [searchParams, setSearchParams] = useSearchParams()
-    // setSearchParams(searchParams.get('id'));
-    // console.log(searchParams)
+    const { login } = useContext(AuthContext);
     useEffect(()=>{
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('isLoggedIn');
@@ -18,19 +17,11 @@ const Login = ()=>{
             [e.target.name] : e.target.value
         })
     }
-    const handleLoginSubmit=(e)=>{
+    const handleLoginSubmit=async (e)=>{
         e.preventDefault();
-        const URL = 'auth/login/';
-        axiosInstance.post(URL,state)
-        .then((res)=>{
-            console.log(res);
-            window.localStorage.setItem('token',res.data.access_token);
-            window.localStorage.setItem('isLoggedIn',true);
-            toastMessage(res.data.mgs,'s');
+        login(state)
+        .then(()=>{
             navigate('/dashboard');
-        })
-        .catch(error=>{
-            toastMessage(error.message,'e');
         })
     }
     return(

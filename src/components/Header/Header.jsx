@@ -1,9 +1,14 @@
+import {  useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../context/AuthContext/AuthContext';
 const Header = ()=>{
     let navigate = useNavigate();
+    const { logout } = useContext(AuthContext);
+    
     const handleLogout=()=>{
-       window.localStorage.removeItem('token');
-       window.localStorage.removeItem('isLoggedIn');
+    //    window.localStorage.removeItem('token');
+    //    window.localStorage.removeItem('isLoggedIn');
+        logout();
        navigate('/');
     }
     return(

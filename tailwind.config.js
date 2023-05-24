@@ -10,6 +10,7 @@ export default {
         primary:"#0B2447",
         secondary:{
           1:'#FFC93C',
+          2:'#EEEEEE'
         }
         
       },

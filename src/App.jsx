@@ -7,20 +7,26 @@ import Dashboard from "./pages/Dashboard";
 import Employee from "./pages/Employee";
 import Todo from './pages/Todo';
 import Settings from './pages/Settings';
-
+import TodoList from './pages/TodoList';
+import EmployeeList from './pages/EmployeeList';
+import { AuthProvider } from './context/AuthContext/AuthContext';
 function App() {
   return (
     <>
-      <Router>
-        <Routes>
-            <Route path="/" element={<Login/>} />
-            <Route path="/registration" element={<Registration/>} />
-            <Route path="/dashboard" element={<Dashboard/>}/>
-            <Route path="/employee" element={<Employee/>}/>
-            <Route path="/todo" element={<Todo/>}/>
-            <Route path="/setting" element={<Settings/>}/>
-        </Routes>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Routes>
+              <Route path="/" element={<Login/>} />
+              <Route path="/registration" element={<Registration/>} />
+              <Route path="/dashboard" element={<Dashboard/>}/>
+              <Route path="/employee" element={<Employee/>}/>
+              <Route path="/employee-list" element={<EmployeeList/>}/>
+              <Route path="/todo" element={<Todo/>}/>
+              <Route path="/todo-list" element={<TodoList/>}/>
+              <Route path="/setting" element={<Settings/>}/>
+          </Routes>
+        </Router>
+      </AuthProvider>
       <ToastContainer/>
     </>
     
