@@ -32,3 +32,9 @@
     background-color: rgb(91, 186, 91);
     border: 0 solid transparent;
 }
+.fc-button{
+    @apply !bg-primary !border-primary
+}
+.fc-icon{
+    @apply !text-secondary-1
+}

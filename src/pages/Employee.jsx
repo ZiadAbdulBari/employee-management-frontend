@@ -9,7 +9,8 @@ const Employee=()=> {
     lastName:"",
     email:"",
     salary:"",
-    role:""
+    role:"",
+    joiningDate:""
   })
   const changeInputValue = (e)=>{
     setFormData({
@@ -28,7 +29,8 @@ const Employee=()=> {
         lastName:"",
         email:"",
         salary:"",
-        role:""
+        role:"",
+        joiningDate:"",
       })
     })
   }
@@ -66,6 +68,12 @@ const Employee=()=> {
                   <label htmlFor="">Salary</label>
               </div>
               <input type="number" name="salary" placeholder="Salary" value={formData.name} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]" />
+            </div>
+            <div className="input">
+              <div className="label mb-2">
+                <label htmlFor="">Joining Date</label>
+              </div>
+              <input type="date" name="joiningDate" value={formData.joiningDate} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]" />
             </div>
           </div>
           <div className="flex justify-end pt-[50px]">
