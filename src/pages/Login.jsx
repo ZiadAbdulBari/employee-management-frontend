@@ -1,15 +1,11 @@
 // import axiosInstance from "../healpers/axios.config";
 // import toastMessage from "../healpers/toast";
-import {  useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from '../context/AuthContext/AuthContext';
 import { useNavigate, Link } from "react-router-dom";
 const Login = ()=>{
     let navigate = useNavigate();
     const { login } = useContext(AuthContext);
-    useEffect(()=>{
-        window.localStorage.removeItem('token');
-        window.localStorage.removeItem('isLoggedIn');
-    },[]);
     const [state,setState] = useState({email:'',password:''});
     const handleChangeField = (e)=>{
         setState({

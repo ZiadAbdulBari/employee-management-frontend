@@ -1,5 +1,5 @@
 import {  useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 const Header = ()=>{
     let navigate = useNavigate();
@@ -12,7 +12,7 @@ const Header = ()=>{
        navigate('/');
     }
     return(
-        <div className="header flex justify-end p-[10px] bg-white">
+        <div className="header flex justify-end p-[10px] bg-white w-full">
             <div className="group auth relative h-full">
                 <svg xmlns="http://www.w3.org/2000/svg" width="49" height="49" viewBox="0 0 49 49" fill="none">
                     <circle cx="24.5" cy="20.4167" r="6.125" stroke="#0B2447" strokeWidth="2" strokeLinecap="round"/>
@@ -21,8 +21,8 @@ const Header = ()=>{
                 </svg>
                 <div className="group-hover:block hidden w-[200px] absolute top-[48px] right-0 bg-white wrapper-shadow px-[20px]">
                     <ul>
-                        <li className="py-[10px] cursor-pointer">Profile</li>
-                        <li className="py-[10px] cursor-pointer">Setting</li>
+                        <li className="py-[10px] cursor-pointer"><NavLink to="/profile">Profile</NavLink></li>
+                        {/* <li className="py-[10px] cursor-pointer">Setting</li> */}
                         <li className="py-[10px] cursor-pointer" onClick={handleLogout}>Logout</li>
                     </ul>
 

@@ -23,7 +23,7 @@ const Registration = ()=>{
             URL = `auth/registration/?id=${params}`;
         }
         else{
-            URL = `auth/registration/?id=#`;
+            URL = `auth/registration/?id=false`;
         }
         axiosInstance.post(URL,formData)
         .then(response=>{
@@ -37,6 +37,7 @@ const Registration = ()=>{
     return(
         <div className="login-wrapper w-full h-screen flex justify-center items-center">
             <div className="form-wrapper px-[40px] py-[50px] rounded-[8px] wrapper-shadow">
+                <p className="text-center mb-8 text-[35px] text-primary ">Welcome to <span className="bg-secondary-1 p-4">EM</span></p>
                 <form onSubmit={handleRegistrationSubmit}>
                     <div className="grid grid-flow-row gap-6">
                         <div className="input">

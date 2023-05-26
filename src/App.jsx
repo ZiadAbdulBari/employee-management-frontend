@@ -10,6 +10,7 @@ import Settings from './pages/Settings';
 import TodoList from './pages/TodoList';
 import EmployeeList from './pages/EmployeeList';
 import { AuthProvider } from './context/AuthContext/AuthContext';
+import Profile from './pages/Profile';
 function App() {
   return (
     <>
@@ -24,6 +25,7 @@ function App() {
               <Route path="/todo" element={<Todo/>}/>
               <Route path="/todo-list" element={<TodoList/>}/>
               <Route path="/setting" element={<Settings/>}/>
+              <Route path="/profile" element={<Profile/>}/>
           </Routes>
         </Router>
       </AuthProvider>
