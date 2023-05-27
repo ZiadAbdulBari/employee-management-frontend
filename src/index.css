@@ -38,3 +38,6 @@
 .fc-icon{
     @apply !text-secondary-1
 }
+.ck-editor__editable[role="textbox"] {
+    min-height: 200px;
+}

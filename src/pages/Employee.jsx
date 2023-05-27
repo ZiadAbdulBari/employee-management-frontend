@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import toastMessage from "../healpers/toast"
 import Layout from "../components/layouts/Layout"
 import axiosInstance from "../healpers/axios.config"
@@ -12,6 +12,15 @@ const Employee=()=> {
     role:"",
     joiningDate:""
   })
+  const [role,setRole] = useState([]);
+  const getSettings = ()=>{
+    const URL = "/settings/get-settings/";
+    const token = window.localStorage.getItem('token');
+    axiosInstance.get(URL,{headers:{Authorization:token}})
+    .then(response=>{
+      setRole(response.data.settingData[0].role);
+    })
+}
   const changeInputValue = (e)=>{
     setFormData({
       ...formData,
@@ -21,7 +30,8 @@ const Employee=()=> {
   const handleInvitationForm = (e)=>{
     e.preventDefault();
     const URL = 'employee/add-employee/';
-    axiosInstance.post(URL,formData)
+    const token = window.localStorage.getItem('token');
+    axiosInstance.post(URL,formData,{headers:{Authorization:token}})
     .then(response=>{
       toastMessage(response.data.message,'s');
       setFormData({
@@ -34,6 +44,9 @@ const Employee=()=> {
       })
     })
   }
+  useEffect(()=>{
+    getSettings();
+  },[])
   return (
     <Layout>
       <Wrapper>
@@ -43,31 +56,40 @@ const Employee=()=> {
               <div className="label mb-2">
                   <label htmlFor="">First Name</label>
               </div>
-              <input id="" type="text" name="firstName" placeholder="First Name" value={formData.name} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]" />
+              <input id="" type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]" />
             </div>
             <div className="input">
               <div className="label mb-2">
                   <label htmlFor="">Last Name</label>
               </div>
-              <input type="text" name="lastName" placeholder="Last Name" value={formData.name} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]" />
+              <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]" />
             </div>
             <div className="input">
               <div className="label mb-2">
                   <label htmlFor="">Email</label>
               </div>
-              <input type="email" name="email" placeholder="Email" value={formData.name} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]" />
+              <input type="email" name="email" placeholder="Email" value={formData.email} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]" />
             </div>
             <div className="input">
               <div className="label mb-2">
                   <label htmlFor="">Role</label>
               </div>
-              <input type="text" name="role" placeholder="Role" value={formData.name} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]" />
+              <select name="role" value={formData.role} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]">
+                <option value="" disabled>Select Role</option>
+                {
+                  role.length>0 ? role.map((position,i)=>{
+                    return(
+                      <option value={position} key={i}>{position}</option>
+                    )
+                  }):<option value="">Role is empty</option>
+                }
+              </select>
             </div>
             <div className="input">
               <div className="label mb-2">
                   <label htmlFor="">Salary</label>
               </div>
-              <input type="number" name="salary" placeholder="Salary" value={formData.name} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]" />
+              <input type="number" name="salary" placeholder="Salary" value={formData.salary} onChange={changeInputValue} className="px-[10px] py-[10px] rounded-[8px] border border-gray-300 !outline-none h-[50px] w-[100%]" />
             </div>
             <div className="input">
               <div className="label mb-2">

@@ -2,10 +2,9 @@ import Wrapper from "../components/Wrapper/Wrapper";
 import Layout from "../components/layouts/Layout";
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axiosInstance from "../healpers/axios.config";
 const Dashboard=()=> {
-  //https://fullcalendar.io/docs#toc
   const [attendance,setAttendance] = useState([]);
   const signon = ()=>{
     const time = new Date();

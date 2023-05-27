@@ -49,10 +49,13 @@ const TodoList = ()=>{
                                 return(
                                     <tr key={index}>
                                         <td className="px-[20px] py-[20px] border border-slate-300">{todo.title}</td>
-                                        <td className="px-[20px] py-[20px] border border-slate-300">{todo.description}</td>
+                                        <td className="px-[20px] py-[20px] border border-slate-300" dangerouslySetInnerHTML={{ __html: todo.description }}/>
                                         <td className="px-[20px] py-[20px] border border-slate-300">{todo.project_name}</td>
                                         <td className="px-[20px] py-[20px] border border-slate-300">{todo.issue_date}</td>
-                                        <td className="px-[20px] py-[20px] border border-slate-300" onClick={()=>changeProgress(todo._id)}>{!todo.start_time && !todo.finish_time ? 'Start' : todo.start_time && !todo.finish_time?'In progress':'completed'}</td>
+                                        <td className="px-[20px] py-[20px] border border-slate-300" onClick={()=>changeProgress(todo._id)}>
+                                            <button className={`border-l-[1px] border-t-[1px] border-b-[1px] border-primary px-2 py-1 ${todo.start_time && !todo.finish_time ?'bg-primary text-secondary-1':''}`}>Start</button>
+                                            <button className={`border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] border-primary px-2 py-1 ${todo.start_time && todo.finish_time?'bg-primary text-secondary-1':''}`}>Finish</button>
+                                        </td>
                                     </tr>
                                 )
                             })
