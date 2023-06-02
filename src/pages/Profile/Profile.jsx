@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import Wrapper from "../components/Wrapper/Wrapper";
-import Layout from "../components/layouts/Layout";
-import axiosInstance from "../healpers/axios.config";
-import toastMessage from "../healpers/toast"
+import Wrapper from "../../components/Wrapper/Wrapper";
+import Layout from "../../components/layouts/Layout";
+import axiosInstance from "../../healpers/axios.config";
+import toastMessage from "../../healpers/toast"
 const Profile = ()=>{
     const [profile,setProfile] = useState({});
     const [updateStatus,setUpdateStatus] = useState(false);
     const getProfileData = ()=>{
         const URL = '/employee/load-profile/';
-        const token = window.localStorage.getItem('token');
+        const token = JSON.parse(window.localStorage.getItem('token'));
         axiosInstance.get(URL,{headers:{Authorization:token}})
         .then(response=>{
             setProfile(response.data.profileData);
@@ -33,7 +33,7 @@ const Profile = ()=>{
     const handleProfileUpdate = (e)=>{
         e.preventDefault();
         const URL = "/employee/update-profile/";
-        const token = window.localStorage.getItem('token');
+        const token = JSON.parse(window.localStorage.getItem('token'));
         console.log(token);
         axiosInstance.post(URL,profile,{headers:{Authorization:token}})
         .then(response=>{
@@ -111,7 +111,7 @@ const Profile = ()=>{
                             </div>
                             <div>
                                 <p className="font-bold mb-2 text-primary text-[18px]">Joining Date</p>
-                                <p className="text-[18px]">{profile.joining_date}</p>
+                                <p className="text-[18px]">{new Date(profile.joining_date).toLocaleDateString()}</p>
                             </div>
                             <div>
                                 <p className="font-bold mb-2 text-primary text-[18px]">Role</p>

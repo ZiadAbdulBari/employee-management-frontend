@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import Wrapper from "../components/Wrapper/Wrapper"
-import Layout from "../components/layouts/Layout"
-import axiosInstance from "../healpers/axios.config";
-import toastMessage from "../healpers/toast";
+import Wrapper from "../../components/Wrapper/Wrapper"
+import Layout from "../../components/layouts/Layout"
+import axiosInstance from "../../healpers/axios.config";
+import toastMessage from "../../healpers/toast";
+import {getSettings} from '../../healpers/api'
 const Setting = ()=>{
     const [role,setRole] = useState([]);
     const [projects,setProjects] = useState([]);
@@ -10,15 +11,12 @@ const Setting = ()=>{
     const [newProject,setNewProject] = useState('');
     const [newRole,setNewRole] = useState('');
     const [newStatus,setNewStatus] = useState('');
-    const getSettings = ()=>{
-        const URL = "/settings/get-settings/";
-        const token = window.localStorage.getItem('token');
-        axiosInstance.get(URL,{headers:{Authorization:token}})
+    const getAllSettings = ()=>{
+        getSettings()
         .then(response=>{
             setRole(response.data.settingData[0].role);
             setProjects(response.data.settingData[0].project);
-            setStatus(response.data.settingData[0].employee_status
-                );
+            setStatus(response.data.settingData[0].employee_status);
         })
     }
     const handleProjectAddField = (e)=>{
@@ -34,7 +32,7 @@ const Setting = ()=>{
         .then(response=>{
             toastMessage(response.data.message,'s');
             setNewProject('');
-            getSettings();
+            getAllSettings();
         })
         .catch(error=>{
             console.log(error);
@@ -45,7 +43,7 @@ const Setting = ()=>{
     }
     const handleRoleAdd = ()=>{
         const URL = "/settings/add-role/";
-        const token = window.localStorage.getItem('token');
+        const token = JSON.parse(window.localStorage.getItem('token'));
         let data={
             newRole:newRole
         }
@@ -53,7 +51,7 @@ const Setting = ()=>{
         .then(response=>{
             toastMessage(response.data.message,'s');
             setNewRole('');
-            getSettings();
+            getAllSettings();
         })
         .catch(error=>{
             console.log(error);
@@ -72,14 +70,62 @@ const Setting = ()=>{
         .then(response=>{
             toastMessage(response.data.message,'s');
             setNewStatus('');
-            getSettings();
+            getAllSettings();
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+    const deleteRole = (possition)=>{
+        const URL = "/settings/delete-role/";
+        const token = window.localStorage.getItem('token');
+        let data={
+            role:possition
+        }
+        axiosInstance.post(URL,data,{headers:{Authorization:token}})
+        .then(response=>{
+            toastMessage(response.data.message,'s');
+            setNewStatus('');
+            getAllSettings();
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+    const deleteProject = (project)=>{
+        const URL = "/settings/delete-project/";
+        const token = window.localStorage.getItem('token');
+        let data={
+            project:project
+        }
+        axiosInstance.post(URL,data,{headers:{Authorization:token}})
+        .then(response=>{
+            toastMessage(response.data.message,'s');
+            setNewStatus('');
+            getAllSettings();
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+    const deleteEmployeeStatus = (type)=>{
+        const URL = "/settings/delete-employee-status/";
+        const token = JSON.parse(window.localStorage.getItem('token'));
+        let data={
+            employeeStatus:type
+        }
+        axiosInstance.post(URL,data,{headers:{Authorization:token}})
+        .then(response=>{
+            toastMessage(response.data.message,'s');
+            setNewStatus('');
+            getAllSettings();
         })
         .catch(error=>{
             console.log(error);
         })
     }
     useEffect(()=>{
-        getSettings();
+        getAllSettings();
     },[]);
     return(
         <Layout>
@@ -104,7 +150,7 @@ const Setting = ()=>{
                                     return(
                                         <div className="flex justify-between items-center" key={index}>
                                             <p>{project}</p>
-                                            <span>
+                                            <span className="cursor-pointer" onClick={()=>deleteProject(project)}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
                                                     <path d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z" fill="rgba(217,21,21,1)"></path>
                                                 </svg>    
@@ -139,7 +185,7 @@ const Setting = ()=>{
                                     return(
                                         <div className="flex justify-between items-center" key={index}>
                                             <p>{position}</p>
-                                            <span>
+                                            <span className="cursor-pointer" onClick={()=>deleteRole(position)}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
                                                     <path d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z" fill="rgba(217,21,21,1)"></path>
                                                 </svg>
@@ -174,7 +220,7 @@ const Setting = ()=>{
                                     return(
                                         <div className="flex justify-between items-center" key={index}>
                                             <p>{type}</p>
-                                            <span>
+                                            <span className="cursor-pointer" onClick={()=>deleteEmployeeStatus(type)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
                                                 <path d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z" fill="rgba(217,21,21,1)"></path>
                                             </svg>

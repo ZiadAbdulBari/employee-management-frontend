@@ -1,17 +1,18 @@
-// import Layout from "./components/layouts/Layout"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer} from 'react-toastify';
-import Registration from "./pages/Registration";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import Employee from "./pages/Employee";
-import Todo from './pages/Todo';
-import Settings from './pages/Settings';
-import TodoList from './pages/TodoList';
-import EmployeeList from './pages/EmployeeList';
+import Registration from "./pages/Registration/Registration";
+import Login from "./pages/Login/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Employee from "./pages/Employee/Employee";
+import Task from './pages/Task/Task';
+import Settings from './pages/Settings/Settings';
+import TaskList from './pages/TaskList/TaskList';
+import EmployeeList from './pages/Employee-list/EmployeeList';
 import { AuthProvider } from './context/AuthContext/AuthContext';
-import Profile from './pages/Profile';
+import Profile from './pages/Profile/Profile';
+// import ProtectedRoute from './healpers/protectRoute';
 function App() {
+
   return (
     <>
       <AuthProvider>
@@ -19,13 +20,14 @@ function App() {
           <Routes>
               <Route path="/" element={<Login/>} />
               <Route path="/registration" element={<Registration/>} />
-              <Route path="/dashboard" element={<Dashboard/>}/>
+              <Route path="/dashboard" element={ <Dashboard/>}/>
               <Route path="/employee" element={<Employee/>}/>
               <Route path="/employee-list" element={<EmployeeList/>}/>
-              <Route path="/todo" element={<Todo/>}/>
-              <Route path="/todo-list" element={<TodoList/>}/>
+              <Route path="/task" element={<Task/>}/>
+              <Route path="/task-list" element={<TaskList/>}/>
               <Route path="/setting" element={<Settings/>}/>
               <Route path="/profile" element={<Profile/>}/>
+              
           </Routes>
         </Router>
       </AuthProvider>

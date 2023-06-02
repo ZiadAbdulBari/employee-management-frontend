@@ -1,7 +1,7 @@
-import Wrapper from "../components/Wrapper/Wrapper";
-import Layout from "../components/layouts/Layout";
+import Wrapper from "../../components/Wrapper/Wrapper";
+import Layout from "../../components/layouts/Layout";
 import { useState,useEffect } from "react";
-import axiosInstance from "../healpers/axios.config";
+import axiosInstance from "../../healpers/axios.config";
 
 const TodoList = ()=>{
     const [todos,setTodos] = useState([]);

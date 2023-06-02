@@ -1,6 +1,6 @@
 import { useState } from "react"
-import axiosInstance from "../healpers/axios.config"
-import toastMessage from "../healpers/toast";
+import axiosInstance from "../../healpers/axios.config"
+import toastMessage from "../../healpers/toast";
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 const Registration = ()=>{
     const [searchParams] = useSearchParams();

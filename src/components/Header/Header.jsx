@@ -4,10 +4,7 @@ import { AuthContext } from '../../context/AuthContext/AuthContext';
 const Header = ()=>{
     let navigate = useNavigate();
     const { logout } = useContext(AuthContext);
-    
     const handleLogout=()=>{
-    //    window.localStorage.removeItem('token');
-    //    window.localStorage.removeItem('isLoggedIn');
         logout();
        navigate('/');
     }

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import Wrapper from "../components/Wrapper/Wrapper"
-import Layout from "../components/layouts/Layout"
-import axiosInstance from "../healpers/axios.config"
-import toastMessage from "../healpers/toast"
+import Wrapper from "../../components/Wrapper/Wrapper"
+import Layout from "../../components/layouts/Layout"
+import axiosInstance from "../../healpers/axios.config"
+import toastMessage from "../../healpers/toast"
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 const Todo = ()=>{

@@ -1,7 +1,5 @@
-// import axiosInstance from "../healpers/axios.config";
-// import toastMessage from "../healpers/toast";
 import { useState, useContext } from "react";
-import { AuthContext } from '../context/AuthContext/AuthContext';
+import { AuthContext } from '../../context/AuthContext/AuthContext';
 import { useNavigate, Link } from "react-router-dom";
 const Login = ()=>{
     let navigate = useNavigate();

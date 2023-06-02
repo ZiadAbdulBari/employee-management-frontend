@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import toastMessage from "../healpers/toast"
-import Layout from "../components/layouts/Layout"
-import axiosInstance from "../healpers/axios.config"
-import Wrapper from "../components/Wrapper/Wrapper"
+import toastMessage from "../../healpers/toast"
+import Layout from "../../components/layouts/Layout"
+import axiosInstance from "../../healpers/axios.config"
+import Wrapper from "../../components/Wrapper/Wrapper"
+import {getSettings} from '../../healpers/api'
 const Employee=()=> {
   const [formData,setFormData] = useState({
     firstName:"",
@@ -13,14 +14,12 @@ const Employee=()=> {
     joiningDate:""
   })
   const [role,setRole] = useState([]);
-  const getSettings = ()=>{
-    const URL = "/settings/get-settings/";
-    const token = window.localStorage.getItem('token');
-    axiosInstance.get(URL,{headers:{Authorization:token}})
+  const getAllSettings = ()=>{
+  getSettings()
     .then(response=>{
       setRole(response.data.settingData[0].role);
     })
-}
+  }
   const changeInputValue = (e)=>{
     setFormData({
       ...formData,
@@ -30,7 +29,7 @@ const Employee=()=> {
   const handleInvitationForm = (e)=>{
     e.preventDefault();
     const URL = 'employee/add-employee/';
-    const token = window.localStorage.getItem('token');
+    const token = JSON.parse(window.localStorage.getItem('token'));
     axiosInstance.post(URL,formData,{headers:{Authorization:token}})
     .then(response=>{
       toastMessage(response.data.message,'s');
@@ -45,7 +44,7 @@ const Employee=()=> {
     })
   }
   useEffect(()=>{
-    getSettings();
+    getAllSettings();
   },[])
   return (
     <Layout>
