@@ -8,7 +8,7 @@ const TodoList = ()=>{
 
     const getTodos = ()=>{
         const URL='/todo/list-todo/';
-        const token = window.localStorage.getItem('token');
+        const token = JSON.parse(window.localStorage.getItem('token'));
         axiosInstance.get(URL,{ headers: { Authorization:token}})
         .then((response)=>{
             setTodos(response.data.all_task);
@@ -16,7 +16,7 @@ const TodoList = ()=>{
     }
     const changeProgress = (id)=>{
         const timeDate = new Date();
-        const token = window.localStorage.getItem('token');
+        const token = JSON.parse(window.localStorage.getItem('token'));
         let data = {
             time:timeDate
         }

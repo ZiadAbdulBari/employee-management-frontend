@@ -17,7 +17,7 @@ const Todo = ()=>{
     const [projects,setProjects] = useState([]);
     const getSettings = ()=>{
         const URL = "/settings/get-settings/";
-        const token = window.localStorage.getItem('token');
+        const token = JSON.parse(window.localStorage.getItem('token'));
         axiosInstance.get(URL,{headers:{Authorization:token}})
         .then(response=>{
             // setRole(response.data.settingData[0].role);
@@ -27,7 +27,7 @@ const Todo = ()=>{
     }
     const getEmployeeList = ()=>{
         let URL = '/employee/list-employee/';
-        const token = window.localStorage.getItem('token');
+        const token = JSON.parse(window.localStorage.getItem('token'));
         axiosInstance.get(URL,{headers:{Authorization:token}})
         .then((response)=>{
             setEmployees(response.data.employeeList)

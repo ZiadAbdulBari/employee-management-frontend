@@ -24,7 +24,7 @@ const Setting = ()=>{
     }
     const handleProjectAdd = ()=>{
         const URL = "/settings/add-project/";
-        const token = window.localStorage.getItem('token');
+        const token = JSON.parse(window.localStorage.getItem('token'));
         let data={
             newProject:newProject
         }
@@ -62,7 +62,7 @@ const Setting = ()=>{
     }
     const handleStatusAdd = ()=>{
         const URL = "/settings/add-employee-status/";
-        const token = window.localStorage.getItem('token');
+        const token = JSON.parse(window.localStorage.getItem('token'));
         let data={
             newStatus:newStatus
         }
@@ -78,7 +78,7 @@ const Setting = ()=>{
     }
     const deleteRole = (possition)=>{
         const URL = "/settings/delete-role/";
-        const token = window.localStorage.getItem('token');
+        const token = JSON.parse(window.localStorage.getItem('token'));
         let data={
             role:possition
         }
@@ -94,7 +94,7 @@ const Setting = ()=>{
     }
     const deleteProject = (project)=>{
         const URL = "/settings/delete-project/";
-        const token = window.localStorage.getItem('token');
+        const token = JSON.parse(window.localStorage.getItem('token'));
         let data={
             project:project
         }
